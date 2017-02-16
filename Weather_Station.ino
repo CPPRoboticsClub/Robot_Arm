@@ -8,7 +8,7 @@
 #include <DHT.h> // Digital Humidity/Temperature Sensor Library
 #include<LiquidCrystal.h> // LCD Screen Library
 
-// Definitions
+// Constants
 const int soilPin = A0; // Soil Probe input set to Analog 0
 const int dhtPin = A1; // DHT input set to Analog 1
 const int dhtType = DHT11; // Type of DHT being used
