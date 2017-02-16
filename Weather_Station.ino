@@ -12,9 +12,8 @@
 const int soilPin = A0; // Soil Probe input set to Analog 0
 const int dhtPin = A1; // DHT input set to Analog 1
 const int dhtType = DHT11; // Type of DHT being used
-const int lowMoisture = 100; // "Dry" value read by soilPin - May need adjusting
-const int medMoisture = 400; // "Damp" value
-const int highMoisture = 700; // "Wet" value
+const int minMoisture = 200; // Minimum level for "Good" moisture
+const int maxMoisture = 400; // Maximum level
 
 // Objects
 DHT dht(dhtPin, dhtType); // DHT object named dht
@@ -61,13 +60,13 @@ void loop() {
   lcd.setCursor(15, 0);
   lcd.print("%");
   lcd.setCursor(0, 1);  
-  if(soilMoisture < lowMoisture) {
-    lcd.print("Soil is dry.    "); // Too little water
+  if(soilMoisture < minMoisture) {
+    lcd.print("Soil is dry.    "); // 'Too little water' message
   }
-  if((soilMoisture >= lowMoisture) && (soilMoisture < medMoisture)) {
-    lcd.print("Soil is damp.   "); // Good amount of water
+  if((soilMoisture >= minMoisture) && (soilMoisture <= maxMoisture)) {
+    lcd.print("Soil is damp.   "); // 'Good amount of water' message
   }
-  if((soilMoisture >= medMoisture) && (soilMoisture < highMoisture)) {
-    lcd.print("Soil is wet.    "); // Too much water
+  if(soilMoisture > maxMoisture) {
+    lcd.print("Soil is wet.    "); // 'Too much water' message
   }
 }
